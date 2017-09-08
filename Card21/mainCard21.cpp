@@ -20,7 +20,7 @@ void main(int argc, char* argv[])
 		hand.pickUpCard(casino.draw());
 	}
 
-	cout << "\n\tCasion Deck:" << endl;
+	cout << "\n\tCasino Deck:" << endl;
 	casino.printHand();
 
 	cout << "\n\tHand Deck:" << endl;
@@ -30,7 +30,7 @@ void main(int argc, char* argv[])
 		casino.pickUpCard(hand.draw());
 	}
 
-	cout << "\n\tCasion Deck:" << endl;
+	cout << "\n\tCasino Deck:" << endl;
 	casino.printHand();
 
 	cout << "\n\tHand Deck:" << endl;
