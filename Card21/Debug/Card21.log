@@ -1,0 +1,9 @@
+﻿  mainCard21.cpp
+  Card.cpp
+  Generating Code...
+LINK : warning LNK4075: ignoring '/INCREMENTAL' due to '/FORCE' specification
+Card.obj : warning LNK4075: ignoring '/EDITANDCONTINUE' due to '/OPT:LBR' specification
+mainCard21.obj : warning LNK4006: "char * * suitChar" (?suitChar@@3PAPADA) already defined in Card.obj; second definition ignored
+c:\users\wesley\documents\visual studio 2015\Projects\Card21\Debug\Card21.exe : warning LNK4088: image being generated due to /FORCE option; image may not run
+  Card21.vcxproj -> c:\users\wesley\documents\visual studio 2015\Projects\Card21\Debug\Card21.exe
+  Card21.vcxproj -> c:\users\wesley\documents\visual studio 2015\Projects\Card21\Debug\Card21.pdb (Partial PDB)
