@@ -11,7 +11,7 @@
 Card::Card()
 {
 	value = ACE;
-	suit = suitChar[HEARTS];
+	suit = suitChar[4];
 }
 
 
@@ -32,7 +32,7 @@ Card::Card(int val, int suitIndex)
 Card::~Card()
 {
 	value = 0;
-	free((void*)suit);
+	//free((void*)suit);
 }
 
 
@@ -58,7 +58,7 @@ int Card::get_value()
 
 int Card::checkCardValue(int val)
 {
-	if (val >= 0 && val < 14) {
+	if (val > 0 && val < 14 ) {
 		return val;
 	}
 	else {
@@ -69,11 +69,11 @@ int Card::checkCardValue(int val)
 
 char* Card::checkCardSuit(int suitIndex)
 {
-	if (suitIndex >= 0 && suitIndex < 4) {
+	if (suitIndex >= 0 && suitIndex <= 4) {
 		return suitChar[suitIndex];
 	}
 	else {
-		return suitChar[0];
+		return suitChar[4];
 	}
 }
 
@@ -85,7 +85,7 @@ char* Card::checkCardSuit(char* st)
 			return st;
 		}
 	}
-	return suitChar[0];
+	return suitChar[4];
 }
 
 void Card::printCard()
@@ -104,16 +104,28 @@ void Card::printCard()
 	case KING:
 		printf("K%s", suit);
 		break;
-	case JOKER:
-		printf("Joker");
-		break;
 	default:
-		printf("%d%s", value + 1, suit);
+		printf("%d%s", value, suit);
 		break;
 	}
 }
 
-int Card::operator+(const Card& card)
+Card Card::operator+(const Card& card)
 {
-	return (this->value + 1) + (card.value + 1);
+	Card result(0, 4);
+	int val1, val2;
+	if (this->value > 10 && this->suit != "\0") {
+		val1 = 10;
+	}
+	else {
+		val1 = this->value;
+	}
+	if (card.value > 10 && card.suit != "\0") {
+		val1 = 10;
+	}
+	else {
+		val2 = card.value;
+	}
+	result.value = val1 + val2;
+	return result;
 }

@@ -1,6 +1,4 @@
-﻿  mainCard21.cpp
-  Card.cpp
-  Generating Code...
+﻿  Card.cpp
 LINK : warning LNK4075: ignoring '/INCREMENTAL' due to '/FORCE' specification
 Card.obj : warning LNK4075: ignoring '/EDITANDCONTINUE' due to '/OPT:LBR' specification
 mainCard21.obj : warning LNK4006: "char * * suitChar" (?suitChar@@3PAPADA) already defined in Card.obj; second definition ignored

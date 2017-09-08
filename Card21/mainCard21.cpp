@@ -13,15 +13,15 @@ void main(int argc, char* argv[])
 	Card card2(4, 2);
 	Card card3(1, 0);
 
-	int result;
-	result = card1.get_value() + card2.get_value() + card3.get_value();
+	Card result;
+	result = card1 + card2 + card3;
 	
 	card1.printCard();
 	cout << " + ";
 	card2.printCard();
 	cout << " + ";
 	card3.printCard();
-	cout << " = " << result << endl;
+	cout << " = " << result.get_value() << endl;
 	cin >> c;
 	return;
 }
