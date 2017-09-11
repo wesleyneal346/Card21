@@ -93,7 +93,7 @@ void Deck::printDeck()
 }
 
 
-void Deck::printHand()
+void Deck::printRemaining()
 {
 	Card card;
 	int counter = 0;
@@ -202,4 +202,14 @@ bool Deck::is_empty()
 	else {
 		return false;
 	}
+}
+
+
+void Deck::operator=(const Deck& inDeck)
+{
+	for (int i = 0; i < MAX_CARDS; i++) {
+		this->arr[i] = inDeck.arr[i];
+	}
+	this->cardCount = inDeck.cardCount;
+	this->deckPlacePtr = inDeck.deckPlacePtr;
 }

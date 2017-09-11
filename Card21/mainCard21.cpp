@@ -20,21 +20,21 @@ void main(int argc, char* argv[])
 		hand.pickUpCard(casino.draw());
 	}
 
-	cout << "\n\tCasino Deck:" << endl;
-	casino.printHand();
+	cout << "\n\tCasion Deck:" << endl;
+	casino.printRemaining();
 
 	cout << "\n\tHand Deck:" << endl;
-	hand.printHand();
+	hand.printRemaining();
 
 	for (int i = 0; i < MAX_CARDS / 4; i++) {
 		casino.pickUpCard(hand.draw());
 	}
 
-	cout << "\n\tCasino Deck:" << endl;
-	casino.printHand();
+	cout << "\n\tCasion Deck:" << endl;
+	casino.printRemaining();
 
 	cout << "\n\tHand Deck:" << endl;
-	hand.printHand();
+	hand.printRemaining();
 
 	cin >> c;
 	return;

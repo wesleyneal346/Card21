@@ -10,85 +10,99 @@
 
 Card::Card()
 {
-	face = NO_FACE;
-	value = 0;
-	suit = suitChar[NO_SUIT];
-	color = NO_COLOR;
+	this->face = NO_FACE;
+	this->value = 0;
+	this->suit = suitChar[NO_SUIT];
+	this->color = NO_COLOR;
+	return;
 }
 
 
 Card::Card(int val, char* st)
 {
-	face = checkCardFace(val);
-	value = checkCardValue(val);
-	suit = checkCardSuit(st);
+	this->set_card(val, st);
+	return;
 }
 
 
 Card::Card(int val, int suitIndex)
 {
-	face = checkCardFace(val);
-	value = checkCardValue(val);
-	suit = checkCardSuit(suitIndex);
+	this->set_card(val, suitIndex);
+	return;
 }
 
 
 Card::~Card()
 {
-	face = NO_FACE;
-	value = 0;
-	suit = suitChar[NO_SUIT];
-	color = NO_COLOR;
+	this->face = NO_FACE;
+	this->value = 0;
+	this->suit = suitChar[NO_SUIT];
+	this->color = NO_COLOR;
 }
 
 
 void Card::set_card(int val, char* st)
 {
-	face = checkCardFace(val);
-	value = checkCardValue(val);
-	suit = checkCardSuit(st);
-	color = checkCardColor(st);
+	this->face = checkCardFace(val);
+	this->value = checkCardValue(val);
+	this->suit = checkCardSuit(st);
+	this->color = checkCardColor(st);
 }
 
 
 void Card::set_card(int val, int suitIndex)
 {
-	face = checkCardFace(val);
-	value = checkCardValue(val);
-	suit = checkCardSuit(suitIndex);
-	color = checkCardColor(suitIndex);
+	this->face = checkCardFace(val);
+	this->value = checkCardValue(val);
+	this->suit = checkCardSuit(suitIndex);
+	this->color = checkCardColor(suitIndex);
+}
+
+
+void Card::set_card(Card inCard)
+{
+	this->face = inCard.face;
+	this->value = inCard.value;
+	this->suit = inCard.suit;
+	this->color = inCard.color;
 }
 
 
 void Card::set_ace_value(int val)
 {
-	if (face == ACE) {
-		value = val;
+	if (this->face == ACE) {
+		this->value = val;
 	}
 }
 
 
 int Card::get_face()
 {
-	return face;
+	return this->face;
 }
 
 
 int Card::get_value()
 {
-	return value;
+	return this->value;
 }
 
 
 char* Card::get_suit()
 {
-	return suit;
+	return this->suit;
 }
 
 
 int Card::get_color()
 {
-	return color;
+	return this->color;
+}
+
+
+Card Card::get_card()
+{
+	return *this;
 }
 
 
@@ -173,22 +187,22 @@ int Card::checkCardColor(char* st)
 
 void Card::printCard()
 {
-	switch (face)
+	switch (this->face)
 	{
 	case ACE:
-		printf("A%s", suit);
+		printf("A%s", this->suit);
 		break;
 	case JACK:
-		printf("J%s", suit);
+		printf("J%s", this->suit);
 		break;
 	case QUEEN:
-		printf("Q%s", suit);
+		printf("Q%s", this->suit);
 		break;
 	case KING:
-		printf("K%s", suit);
+		printf("K%s", this->suit);
 		break;
 	default:
-		printf("%d%s", face, suit);
+		printf("%d%s", this->face, this->suit);
 		break;
 	}
 }
@@ -196,7 +210,7 @@ void Card::printCard()
 
 bool Card::is_Ace()
 {
-	if (face == ACE) {
+	if (this->face == ACE) {
 		return true;
 	}
 	else {
@@ -213,12 +227,12 @@ Card Card::operator+(const Card& card)
 }
 
 
-void Card::operator=(const Card& card)
+void Card::operator=(const Card& inCard)
 {
-	this->face = card.face;
-	this->value = card.value;
-	this->suit = card.suit;
-	this->color = card.color;
+	this->face = inCard.face;
+	this->value = inCard.value;
+	this->suit = inCard.suit;
+	this->color = inCard.color;
 }
 
 
