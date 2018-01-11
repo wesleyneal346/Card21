@@ -21,12 +21,12 @@ Deck::Deck() {
 }
 
 
-Deck::Deck(int special_face, int specail_suit) {
+Deck::Deck(int special_face, int special_suit) {
     int i = 0;
     for (int j = HEARTS; j <= SPADES; j++) {
         for (int k = ACE; k <= KING; k++) {
             if (i < MAX_CARDS) {
-                this->arr[i].set_card(special_face, specail_suit);
+				this->arr[i].set_card(special_face, special_suit);
             }
             i++;
         }
@@ -171,7 +171,7 @@ void Deck::pickUpCard(Card card) {
 
 
 bool Deck::is_full() {
-    if (this->cardCount == MAX_CARDS) {
+    if (this->cardCount >= MAX_CARDS) {
         return true;
     } else {
         return false;
@@ -180,7 +180,7 @@ bool Deck::is_full() {
 
 
 bool Deck::is_empty() {
-    if (this->cardCount == 0) {
+    if (this->cardCount <= 0) {
         return true;
     } else {
         return false;

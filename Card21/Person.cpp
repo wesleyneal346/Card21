@@ -231,7 +231,7 @@ int Person::calculateScore() {
             result += currCard.get_value();
         }
     }
-    this->score += result;
+    this->score = result;
     return result;
 }
 

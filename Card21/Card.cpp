@@ -94,7 +94,7 @@ Card Card::get_card() {
 
 
 int Card::checkCardFace(int val) {
-    if (val > 0 && val < 14) {
+    if (val > NO_FACE && val <= KING ) {
         return val;
     } else {
         return 0;
@@ -103,9 +103,9 @@ int Card::checkCardFace(int val) {
 
 
 int Card::checkCardValue(int val) {
-    if (val > 0 && val < 10) {
+    if (val > NO_FACE && val < TEN) {
         return val;
-    } else if (val >= 10) {
+    } else if (val >= TEN) {
         return 10;
     } else {
         return 0;

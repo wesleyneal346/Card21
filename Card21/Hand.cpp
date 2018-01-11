@@ -36,16 +36,27 @@ void Hand::set_cards(Card inCard) {
     for (int i = 0; i < MAX_HAND_CAP; i++) {
         this->set_card(inCard);
     }
+	cardCount = MAX_HAND_CAP;
     return;
 }
 
 
 void Hand::set_card(Card inCard, int index) {
     Card nullCard(NO_FACE, NO_SUIT);
-    if (this->arr[index].get_card() != nullCard) {
-        this->arr[index] = inCard;
-    }
-    cardCount++;
+	for (int i = 0; i < MAX_HAND_CAP; i++) {
+		if (this->arr[index].get_card() == nullCard) {
+			this->arr[index] = inCard;
+			cardCount++;
+			return;
+		}
+		else {
+			index++;
+			if (index >= MAX_HAND_CAP) {
+				index = 0;
+			}
+		}	
+	}
+	// maybe indicate an error here.
     return;
 }
 
@@ -59,6 +70,10 @@ void Hand::set_card(Card inCard) {
     } else {
         while (this->arr[i] != nullCard && this->arr[i] != inCard) {
             i++;
+			if (i >= MAX_HAND_CAP) {
+				// maybe indicate an error here as well.
+				return;
+			}
         }
         this->arr[i] = inCard;
         cardCount++;
@@ -116,7 +131,7 @@ Card Hand::discardCard(int index) {
     Card nullCard(NO_FACE, NO_SUIT);
 
     if (this->is_empty()) {
-        printf("\n\HAND EMPTY\n");
+        printf("\nHAND EMPTY\n");
         return nullCard;
     }
 
@@ -130,10 +145,11 @@ Card Hand::discardCard(int index) {
 
 Hand Hand::discardHand() {
     Hand result;
-    result.cardCount = this->cardCount;
+	result.cardCount = this->cardCount;
     for (int i = 0; i < MAX_HAND_CAP; i++) {
         result.arr[i] = this->discardCard(i);
     }
+	this->cardCount = 0;
     return result;
 }
 
