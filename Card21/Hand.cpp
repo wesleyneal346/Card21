@@ -33,10 +33,16 @@ Hand::~Hand() {
 
 
 void Hand::set_cards(Card inCard) {
+	Card nullCard(NO_FACE, NO_SUIT);
     for (int i = 0; i < MAX_HAND_CAP; i++) {
         this->set_card(inCard);
     }
-	cardCount = MAX_HAND_CAP;
+	if (inCard == nullCard) {
+		this->cardCount = 0;
+	}
+	else {
+		this->cardCount = MAX_HAND_CAP;
+	}
     return;
 }
 
@@ -100,21 +106,16 @@ int Hand::get_count() {
 void Hand::printHand() {
     Card card;
     int counter = 0;
+	printf("\n");
     for (int i = 0; i < MAX_HAND_CAP; i++) {
         card = this->arr[i];
         if (card.get_face() == NO_FACE) {
             continue;
         }
-        if (card.get_face() != TEN) {
-            printf(" ");
-        }
-        printf(" ");
         card.printCard();
-        if ((counter + 1) % 13 == 0) {
-            printf("\n");
-        }
         counter++;
     }
+	printf("\n");
     return;
 }
 

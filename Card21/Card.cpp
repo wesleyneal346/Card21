@@ -62,7 +62,7 @@ void Card::set_card(Card inCard) {
 
 
 void Card::set_ace_value(int val) {
-    if (this->face == ACE) {
+    if (this->face == ACE && (val == 1 || val == 11)) {
         this->value = val;
     }
 }
@@ -95,7 +95,7 @@ Card Card::get_card() {
 
 int Card::checkCardFace(int val) {
     if (val > NO_FACE && val <= KING ) {
-        return val;
+		return val;
     } else {
         return 0;
     }
@@ -103,6 +103,9 @@ int Card::checkCardFace(int val) {
 
 
 int Card::checkCardValue(int val) {
+	if (this->is_Ace()) {
+		return 0; // Check at the end of the round what to set this number to.
+	}
     if (val > NO_FACE && val < TEN) {
         return val;
     } else if (val >= TEN) {
@@ -161,19 +164,19 @@ int Card::checkCardColor(char* st) {
 void Card::printCard() {
     switch (this->face) {
     case ACE:
-        printf("A%s", this->suit);
+        printf("%*s%s", 3, "A", this->suit);
         break;
     case JACK:
-        printf("J%s", this->suit);
+		printf("%*s%s", 3, "J", this->suit);
         break;
     case QUEEN:
-        printf("Q%s", this->suit);
+		printf("%*s%s", 3, "Q", this->suit);
         break;
     case KING:
-        printf("K%s", this->suit);
+		printf("%*s%s", 3, "K", this->suit);
         break;
     default:
-        printf("%d%s", this->face, this->suit);
+        printf("%*d%s", 3, this->face, this->suit);
         break;
     }
 }

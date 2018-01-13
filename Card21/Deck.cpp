@@ -68,19 +68,16 @@ Card Deck::nextCard() {
 void Deck::printDeck() {
     Card card;
     for (int i = 0; i < MAX_CARDS; i++) {
-        card = this->nextCard();
-        if (card.get_face() != TEN) {
-            printf(" ");
-        }
+		card = this->nextCard();
         if (card.get_face() == NO_FACE) {
             printf(" ");
         }
-        printf(" ");
         card.printCard();
         if ((i + 1) % 13 == 0) {
             printf("\n");
         }
-    }
+	}
+	printf("\n");
     this->deckPlacePtr = 0;
     return;
 }
@@ -89,21 +86,20 @@ void Deck::printDeck() {
 void Deck::printRemaining() {
     Card card;
     int counter = 0;
+
+	printf("\n\tTHE DECK (debugging)\n");
     for (int i = 0; i < MAX_CARDS; i++) {
         card = this->nextCard();
         if (card.get_face() == NO_FACE) {
             continue;
         }
-        if (card.get_face() != TEN) {
-            printf(" ");
-        }
-        printf(" ");
         card.printCard();
         if ((counter + 1) % 13 == 0) {
             printf("\n");
         }
         counter++;
     }
+	printf("\n");
     this->deckPlacePtr = 0;
     return;
 }

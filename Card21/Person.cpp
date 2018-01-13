@@ -48,10 +48,9 @@ Person::Person(char* inName, int inNumber, Hand inHand, float inWallet,
 
 
 Person::~Person() {
-    Card nullCard(NO_FACE, NO_SUIT);
     this->name = "";
-    this->number = 0;
-    this->playerHand.set_cards(nullCard);
+	this->number = 0;
+	this->playerHand.~Hand();
     this->wallet = 0.0;
     this->score = 0;
     this->wins = 0;
@@ -99,7 +98,7 @@ void Person::set_person(char* inName, int inScore, int inWins, int inLosses) {
 
 
 void Person::set_person(char* inName, int inNumber,
-                        Hand inHand, float inWallet, int inScore, int inWins, int inLosses) {
+	Hand inHand, float inWallet, int inScore, int inWins, int inLosses) {
     this->set_name(inName);
     this->number = inNumber;
     this->playerHand = inHand;
@@ -147,14 +146,14 @@ void Person::set_score(int inScore) {
 }
 
 
-void Person::set_wins(int) {
-    this->wins = wins;
+void Person::set_wins(int inWins) {
+	this->wins = inWins;
     return;
 }
 
 
-void Person::set_losses(int) {
-    this->losses = losses;
+void Person::set_losses(int inLosses) {
+	this->losses = inLosses;
     return;
 }
 
@@ -200,22 +199,61 @@ void Person::sayHello(char* opponent) {
 }
 
 
+void Person::acceptCard(Card inCard) {
+	this->playerHand.pickUpCard(inCard);
+}
+
+Card Person::discardCard(int index) {
+	return this->playerHand.discardCard(index);
+}
+
+
+/// @todo Check against user input that is not a number
 float Person::placeBet(float bet) {
     float maxBet = this->get_wallet();
     float result = 0.0;
+
     if (bet < maxBet && bet > 0) {
-        printf("%s placing bet of $%d", this->get_name(), bet);
         this->set_wallet(maxBet - bet);
-        return bet;
-    } else if (bet < 0) {
-        printf("%s placing min-bet of $%d", this->get_name(), 1);
-        this->set_wallet(maxBet - 1);
-        return maxBet;
+        result = bet;
+    } else if (bet <= 0) {
+        this->set_wallet(maxBet - 0.01);
+        result = maxBet;
     } else {
-        printf("%s placing max-bet of $%d", this->get_name(), maxBet);
         this->set_wallet(0);
-        return maxBet;
+        result = maxBet;
     }
+
+	printf("\n%s placing bet of $%.2f\n", this->get_name(), result);
+	return result;
+}
+
+void Person::set_Ace(int index, int val) {
+	// Polymorphism may be useful here
+	Card* allegedAce = &this->playerHand.get_card(index);
+	if (allegedAce->is_Ace()) {
+		allegedAce->set_ace_value(val);
+	}
+	else {
+		// some error here. Like, "This is not an ACE"
+	}
+}
+
+
+int Person::has_Ace(int index[MAX_CHAR_CAP]) {
+	// Polymorphism may be useful here
+	Card* allegedAce;
+	int aceCount = 0;
+	int i = 0;
+	int j = 0;
+	for (int i = 0; i < MAX_HAND_CAP; i++) {
+		allegedAce = &this->playerHand.get_card(i);
+		if (allegedAce->is_Ace()) {
+			index[j] = i;
+			j++; aceCount++;
+		}
+	}
+	return aceCount;
 }
 
 
@@ -235,6 +273,27 @@ int Person::calculateScore() {
     return result;
 }
 
+
+void Person::printStats() {
+	printf("\n\t%s",this->name);
+	this->playerHand.printHand();
+	for (int i = 0; i < this->playerHand.get_count(); i++) {
+		printf("%*i", 4, i + 1);
+	}
+	printf("\n    Wins: %i    Losses: %i    Wallet: %.2f\n", this->wins,
+		this->losses, this->wallet);
+	return;
+}
+
+void Person::printHand() {
+	if (this->playerHand.get_count() == 0) {
+		printf("\n(empty)\n");
+	}
+	else {
+		this->playerHand.printHand();
+	}
+	return;
+}
 
 void Person::operator=(const Person& inPerson) {
     this->set_person(inPerson.name, inPerson.number, inPerson.playerHand,

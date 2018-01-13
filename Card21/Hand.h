@@ -5,7 +5,7 @@
 const int MAX_HAND_CAP = 13;
 
 /// A class to handle an array of Cards to be used with player Persons
-class Hand {
+class Hand : public Card {
 private:
     Card arr[MAX_HAND_CAP];///<A Card array
     int cardCount;///<The current number of cards in the Card array

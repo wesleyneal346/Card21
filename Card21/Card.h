@@ -39,15 +39,15 @@ enum CARD_COLOR {
 /// 1 if normal characters, 0 if special escape characters
 #define __SUIT_CHAR 0;
 
-#if __SUIT_CHAR
+#if __SUIT_CHAR == 1
 char* suitChar[] = { "\0", "H", "D", "C", "S" };
-#else
+#else __SUIT_CHAR == 0
 char* suitChar[] = { "\0", "\3", "\4", "\5", "\6" };
 #endif
 
 /// A class that handles all the parameters of a card with public functions
 class Card {
-private:
+protected:
     int face;///<A number indicating what card the Card is. @see SUIT
     int value;///<A number indicating the value for the card. @see CARD_VAL
     char* suit;///<A char indicating the suit of the Card; @see __SUIT_CHAR
@@ -120,6 +120,20 @@ public:
 	/// for the values.
 	/// @return Returns an integer indicating the value of the Card
 	/// @note No private variables are changed in the function.
+	/// Score is calculated as follows:
+	/// - Ace    1 or 11 points depending on the Person
+	/// - Two    2 points
+	/// - Three  3 points
+	/// - Four   4 points
+	/// - Five   5 points
+	/// - Six    6 points
+	/// - Seven  7 points
+	/// - Eight  8 points
+	/// - Nine   9 points
+	/// - Ten   10 points
+	/// - Jack  10 points
+	/// - Queen 10 points
+	/// - King  10 points
 	int Card::checkCardValue(int);
 
 	/// @brief Checks the input given to see if it's within range of the values
